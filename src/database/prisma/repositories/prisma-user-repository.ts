@@ -1,0 +1,77 @@
+import { Injectable } from '@nestjs/common';
+import { PrismaService } from '../prisma.service';
+import { UserRepository } from '@/repositories/user.repository';
+import { User } from '@prisma/client';
+import { PaginationParams } from '@/utils/paginations-params';
+
+Injectable();
+export class PrismaUserRepository implements UserRepository {
+  constructor(private prisma: PrismaService) {}
+
+  async create(data: User): Promise<void> {
+    await this.prisma.user.create({
+      data,
+    });
+  }
+
+  async update(userId: string, userData: Partial<User>): Promise<User | null> {
+    const user = await this.prisma.user.update({
+      where: {
+        id: userId,
+      },
+      data: userData,
+    });
+
+    return user;
+  }
+
+  async delete(id: string): Promise<void> {
+    await this.prisma.user.delete({
+      where: {
+        id,
+      },
+    });
+  }
+
+  async findAll({ page }: PaginationParams): Promise<User[]> {
+    const users = await this.prisma.user.findMany({
+      orderBy: {
+        createdAt: 'desc',
+      },
+      take: 20,
+      skip: (page - 1) * 20,
+    });
+
+    return users;
+  }
+
+  async findById(id: string): Promise<User | null> {
+    const user = await this.prisma.user.findUnique({
+      where: {
+        id,
+      },
+    });
+
+    return user;
+  }
+
+  async findByEmail(email: string): Promise<User | null> {
+    const user = await this.prisma.user.findUnique({
+      where: {
+        email,
+      },
+    });
+
+    return user;
+  }
+
+  async findByUsername(username: string): Promise<User | null> {
+    const user = await this.prisma.user.findUnique({
+      where: {
+        username,
+      },
+    });
+
+    return user;
+  }
+}
