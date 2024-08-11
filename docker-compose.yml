@@ -1,0 +1,13 @@
+services:
+  postgres:
+    container_name: txai-postgres-pedrodecf
+    image: postgres
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: txai
+      POSTGRES_PASSWORD: txai
+      POSTGRES_DB: txai
+      PG_DATA: ./data/pg:/data/postgres
+    volumes:      
+      - ./data/pg:/data/postgres
