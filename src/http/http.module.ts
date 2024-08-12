@@ -16,6 +16,9 @@ import { GetProductByIDUseCase } from '@/domain/use-cases/products/get-product-b
 import { AuthenticateController } from './controllers/authenticate-user.controller';
 import { CreateProductController } from './controllers/create-product.controller';
 import { DeleteProductController } from './controllers/delete-product.controller';
+import { EditProductController } from './controllers/edit-product.controller';
+import { FetchProductsController } from './controllers/fetch-products.controller';
+import { GetProductController } from './controllers/get-product.controller';
 
 @Module({
   imports: [DatabaseModule],
@@ -24,6 +27,9 @@ import { DeleteProductController } from './controllers/delete-product.controller
     AuthenticateController,
     CreateProductController,
     DeleteProductController,
+    EditProductController,
+    FetchProductsController,
+    GetProductController,
   ],
   providers: [
     CreateUserUseCase,

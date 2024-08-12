@@ -11,7 +11,7 @@ interface GetProductByIDUseCaseRequest {
   userId: string;
 }
 
-interface GetProductByIDUseCaseResponse {
+export interface GetProductByIDUseCaseResponse {
   product: Product;
 }
 

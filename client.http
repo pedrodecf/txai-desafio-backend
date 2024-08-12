@@ -7,9 +7,9 @@ POST {{baseUrl}}/users
 Content-Type: application/json
 
 {
-    "name": "John Doe",
-    "username": "johndoezera",
-    "email": "john@doe.com",
+    "name": "Max Doe",
+    "username": "max",
+    "email": "max@doe.com",
     "password": "password"
 }
 
@@ -21,7 +21,7 @@ POST {{baseUrl}}/auth
 Content-Type: application/json
 
 {
-  "username": "johndoezera",
+  "username": "max",
   "password": "password"
 }
 
@@ -44,5 +44,35 @@ Authorization: Bearer {{authToken}}
 # @name delete_product
 
 DELETE {{baseUrl}}/products/{{productId}}
+Content-Type: application/json
+Authorization: Bearer {{authToken}}
+
+###
+
+# @name edit_product
+
+PUT {{baseUrl}}/products/{{productId}}
+Content-Type: application/json
+Authorization: Bearer {{authToken}}
+
+{
+    "name": "Product 2",
+    "quantity": 5,
+    "value": 10.99
+}
+
+###
+
+# @name fetch_products
+
+GET {{baseUrl}}/products
+Content-Type: application/json
+Authorization: Bearer {{authToken}}
+
+###
+
+# @name get_product_by_id
+
+GET {{baseUrl}}/products/{{productId}}
 Content-Type: application/json
 Authorization: Bearer {{authToken}}

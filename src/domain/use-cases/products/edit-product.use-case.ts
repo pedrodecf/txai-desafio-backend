@@ -14,7 +14,7 @@ interface EditProductUseCaseRequest {
   quantity?: number;
 }
 
-interface EditProductUseCaseResponse {
+export interface EditProductUseCaseResponse {
   product: Product | null;
 }
 

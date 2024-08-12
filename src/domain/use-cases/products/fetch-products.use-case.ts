@@ -7,7 +7,7 @@ interface FetchProductsUseCaseRequest {
   page: number;
 }
 
-interface FetchProductsUseCaseResponse {
+export interface FetchProductsUseCaseResponse {
   products: Product[];
 }
 
