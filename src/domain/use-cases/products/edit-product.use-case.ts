@@ -15,7 +15,7 @@ interface EditProductUseCaseRequest {
 }
 
 export interface EditProductUseCaseResponse {
-  product: Product | null;
+  product: Product;
 }
 
 @Injectable()

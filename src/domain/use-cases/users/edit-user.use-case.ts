@@ -1,6 +1,7 @@
 import { User, UserRole } from '@prisma/client';
 import { UserRepository } from '../../repositories/user.repository';
 import { Injectable, NotFoundException } from '@nestjs/common';
+import { excludePassword } from '@/utils/exclued-password';
 
 interface EditUserUseCaseRequest {
   userId: string;
@@ -41,6 +42,6 @@ export class EditUserUseCase {
       password: password ?? existingUser.password,
     });
 
-    return { user: updatedUser };
+    return { user: excludePassword(updatedUser) };
   }
 }

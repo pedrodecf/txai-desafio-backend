@@ -8,13 +8,15 @@ import { UserRepository } from '@/domain/repositories/user.repository';
 export class PrismaUserRepository implements UserRepository {
   constructor(private prisma: PrismaService) {}
 
-  async create(data: User): Promise<void> {
-    await this.prisma.user.create({
+  async create(data: User): Promise<User> {
+    const user = await this.prisma.user.create({
       data,
     });
+
+    return user;
   }
 
-  async update(userId: string, userData: Partial<User>): Promise<User | null> {
+  async update(userId: string, userData: Partial<User>): Promise<User> {
     const user = await this.prisma.user.update({
       where: {
         id: userId,

@@ -1,6 +1,9 @@
 import { Body, Controller, Post } from '@nestjs/common';
 import { z } from 'zod';
-import { CreateUserUseCase } from '@/domain/use-cases/users/create-user.use-case';
+import {
+  CreateUserUseCase,
+  CreateUserUseCaseResponse,
+} from '@/domain/use-cases/users/create-user.use-case';
 import { ZodValidationPipe } from '../pipes/zod-validation.pipe';
 
 const createUserBodySchema = z.object({
@@ -18,14 +21,18 @@ export class CreateUserController {
   constructor(private createUser: CreateUserUseCase) {}
 
   @Post()
-  async handle(@Body(bodyValidationPipe) body: CreateUserBodySchema) {
+  async handle(
+    @Body(bodyValidationPipe) body: CreateUserBodySchema,
+  ): Promise<CreateUserUseCaseResponse> {
     const { name, username, password, email } = body;
 
-    await this.createUser.execute({
+    const user = await this.createUser.execute({
       email,
       name,
       password,
       username,
     });
+
+    return user;
   }
 }

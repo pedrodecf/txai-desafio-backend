@@ -41,12 +41,14 @@ export class EditUserController {
   ) {
     const { name, email, password, username } = body;
 
-    await this.editUser.execute({
+    const userEdited = await this.editUser.execute({
       userId: user.sub,
       name,
       email,
       password,
       username,
     });
+
+    return userEdited;
   }
 }

@@ -6,10 +6,7 @@ export abstract class ProductRepository {
     product: Prisma.ProductUncheckedCreateInput,
   ): Promise<Product>;
 
-  abstract update(
-    id: string,
-    productData: Partial<Product>,
-  ): Promise<Product | null>;
+  abstract update(id: string, productData: Partial<Product>): Promise<Product>;
 
   abstract delete(id: string): Promise<void>;
 

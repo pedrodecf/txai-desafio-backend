@@ -16,7 +16,7 @@ export class PrismaProductRepository implements ProductRepository {
     return product;
   }
 
-  update(id: string, productData: Partial<Product>): Promise<Product | null> {
+  update(id: string, productData: Partial<Product>): Promise<Product> {
     const product = this.prisma.product.update({
       where: {
         id,

@@ -11,7 +11,7 @@ interface CreateUserUseCaseRequest {
   email: string;
 }
 
-interface CreateUserUseCaseResponse {
+export interface CreateUserUseCaseResponse {
   user: Omit<User, 'password'>;
 }
 
