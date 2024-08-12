@@ -18,7 +18,7 @@ describe('Get User By ID Use Case', () => {
     inMemoryUserRepository.create(user);
 
     const response = await sut.execute({ userId: user.id.toString() });
-    expect(response.user).toEqual(user);
+    expect(response.user.name).toEqual(user.name);
   });
 
   it('should not be able to get a user by ID if it does not exist', async () => {

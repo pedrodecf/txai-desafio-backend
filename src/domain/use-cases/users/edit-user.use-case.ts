@@ -11,8 +11,8 @@ interface EditUserUseCaseRequest {
   password?: string;
 }
 
-interface EditUserUseCaseResponse {
-  user: User | null;
+export interface EditUserUseCaseResponse {
+  user: Omit<User, 'password'>;
 }
 
 @Injectable()
@@ -30,7 +30,7 @@ export class EditUserUseCase {
     const existingUser = await this.userRepository.findById(userId);
 
     if (!existingUser) {
-      throw new NotFoundException('Resource not found');
+      throw new NotFoundException('User not found');
     }
 
     const updatedUser = await this.userRepository.update(userId, {

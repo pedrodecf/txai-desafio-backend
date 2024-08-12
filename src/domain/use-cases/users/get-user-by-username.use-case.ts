@@ -1,13 +1,14 @@
 import { User } from '@prisma/client';
 import { UserRepository } from '../../repositories/user.repository';
 import { Injectable, NotFoundException } from '@nestjs/common';
+import { excludePassword } from '@/utils/exclued-password';
 
 interface GetUserByUsernameUseCaseRequest {
   username: string;
 }
 
 export interface GetUserByUsernameUseCaseResponse {
-  user: User;
+  user: Omit<User, 'password'>;
 }
 
 @Injectable()
@@ -20,9 +21,9 @@ export class GetUserByUsernameUseCase {
     const user = await this.userRepository.findByUsername(username);
 
     if (!user) {
-      throw new NotFoundException('Resource not found');
+      throw new NotFoundException('User not found');
     }
 
-    return { user };
+    return { user: excludePassword(user) };
   }
 }

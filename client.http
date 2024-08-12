@@ -90,7 +90,7 @@ Authorization: Bearer {{authToken}}
 
 # @name get_user_by_username
 
-GET {{baseUrl}}/users/max
+GET {{baseUrl}}/users/adfa
 Content-Type: application/json
 Authorization: Bearer {{authToken}}
 

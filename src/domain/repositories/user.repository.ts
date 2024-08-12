@@ -2,12 +2,9 @@ import { PaginationParams } from '@/utils/paginations-params';
 import { Prisma, User } from '@prisma/client';
 
 export abstract class UserRepository {
-  abstract create(user: Prisma.UserUncheckedCreateInput): Promise<void>;
+  abstract create(user: Prisma.UserUncheckedCreateInput): Promise<User>;
 
-  abstract update(
-    userId: string,
-    userData: Partial<User>,
-  ): Promise<User | null>;
+  abstract update(userId: string, userData: Partial<User>): Promise<User>;
 
   abstract delete(id: string): Promise<void>;
 

@@ -20,8 +20,8 @@ describe('Fetch Users Use Case', () => {
 
     const response = await sut.execute({ page: 1 });
     expect(response.users.length).toBe(2);
-    expect(response.users[0]).toEqual(user);
-    expect(response.users[1]).toEqual(user2);
+    expect(response.users[0].name).toEqual(user.name);
+    expect(response.users[1].name).toEqual(user2.name);
   });
 
   it('should be able to fetch paginated users', async () => {

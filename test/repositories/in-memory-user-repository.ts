@@ -6,7 +6,7 @@ import { randomUUID } from 'node:crypto';
 export class InMemoryUserRepository implements UserRepository {
   public items: User[] = [];
 
-  async create(user: User) {
+  async create(user: User): Promise<User> {
     const newUser: User = {
       id: user.id || randomUUID(),
       name: user.name,
@@ -19,6 +19,8 @@ export class InMemoryUserRepository implements UserRepository {
     };
 
     this.items.push(newUser);
+
+    return newUser;
   }
 
   async delete(userId: string): Promise<void> {
