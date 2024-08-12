@@ -1,8 +1,6 @@
-import { EmailAlreadyInUseError } from '../errors/email-already-in-use.error';
-import { UsernameAlreadyInUseError } from '../errors/username-already-in-use.error';
 import { UserRepository } from '../../repositories/user.repository';
 import { hash } from 'bcryptjs';
-import { Injectable } from '@nestjs/common';
+import { ConflictException, Injectable } from '@nestjs/common';
 
 interface CreateUserUseCaseRequest {
   name: string;
@@ -22,11 +20,11 @@ export class CreateUserUseCase {
     ]);
 
     if (emailAlreadyInUse) {
-      throw new EmailAlreadyInUseError();
+      throw new ConflictException('This email is already in use');
     }
 
     if (usernameAlreadyExists) {
-      throw new UsernameAlreadyInUseError();
+      throw new ConflictException('This username is already in use');
     }
 
     const hashedPassword = await hash(password, 8);

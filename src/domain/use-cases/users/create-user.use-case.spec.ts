@@ -1,9 +1,8 @@
 import { makeUser } from 'test/factories/make-user';
 import { InMemoryUserRepository } from 'test/repositories/in-memory-user-repository';
-import { EmailAlreadyInUseError } from '../errors/email-already-in-use.error';
-import { UsernameAlreadyInUseError } from '../errors/username-already-in-use.error';
 import { CreateUserUseCase } from './create-user.use-case';
 import { compare } from 'bcryptjs';
+import { ConflictException } from '@nestjs/common';
 
 let inMemoryUserRepository: InMemoryUserRepository;
 let sut: CreateUserUseCase;
@@ -49,7 +48,7 @@ describe('Create User Use Case', () => {
         password: 'any_password',
         username: 'any_username',
       }),
-    ).rejects.toThrow(EmailAlreadyInUseError);
+    ).rejects.toThrow(ConflictException);
   });
 
   it('should not be able to create a user with an username that is already in use', async () => {
@@ -65,7 +64,7 @@ describe('Create User Use Case', () => {
       username: USERNAME_FOR_TEST,
     });
 
-    await expect(sut.execute(user2)).rejects.toThrow(UsernameAlreadyInUseError);
+    await expect(sut.execute(user2)).rejects.toThrow(ConflictException);
   });
 
   it('should hash the password before saving it', async () => {

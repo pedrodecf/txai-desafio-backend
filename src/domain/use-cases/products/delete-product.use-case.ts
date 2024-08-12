@@ -1,6 +1,5 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { ProductRepository } from '../../repositories/product.repository';
-import { ResourceNotFoundError } from '../errors/resource-not-found.error';
 
 interface DeleteProductUseCaseRequest {
   productId: string;
@@ -14,7 +13,7 @@ export class DeleteProductUseCase {
     const productExists = await this.productRepository.findById(productId);
 
     if (!productExists) {
-      throw new ResourceNotFoundError();
+      throw new NotFoundException('Resource not found');
     }
 
     await this.productRepository.delete(productId);

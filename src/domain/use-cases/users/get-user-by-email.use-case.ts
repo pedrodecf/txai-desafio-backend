@@ -1,7 +1,6 @@
 import { User } from '@prisma/client';
 import { UserRepository } from '../../repositories/user.repository';
-import { Injectable } from '@nestjs/common';
-import { ResourceNotFoundError } from '../errors/resource-not-found.error';
+import { Injectable, NotFoundException } from '@nestjs/common';
 
 interface GetUserByEmailUseCaseRequest {
   email: string;
@@ -21,7 +20,7 @@ export class GetUserByEmailUseCase {
     const user = await this.userRepository.findByEmail(email);
 
     if (!user) {
-      throw new ResourceNotFoundError();
+      throw new NotFoundException('Resource not found');
     }
 
     return { user };

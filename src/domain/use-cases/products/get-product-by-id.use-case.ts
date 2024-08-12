@@ -1,8 +1,10 @@
 import { Product } from '@prisma/client';
 import { ProductRepository } from '../../repositories/product.repository';
-import { Injectable } from '@nestjs/common';
-import { UnauthorizedError } from '../errors/unauthorized.error';
-import { ResourceNotFoundError } from '../errors/resource-not-found.error';
+import {
+  Injectable,
+  NotFoundException,
+  UnauthorizedException,
+} from '@nestjs/common';
 
 interface GetProductByIDUseCaseRequest {
   productId: string;
@@ -24,11 +26,11 @@ export class GetProductByIDUseCase {
     const product = await this.productRepository.findById(productId);
 
     if (!product) {
-      throw new ResourceNotFoundError();
+      throw new NotFoundException('Resource not found');
     }
 
     if (product.userId.toString() !== userId) {
-      throw new UnauthorizedError();
+      throw new UnauthorizedException('Unauthorized access');
     }
 
     return { product };

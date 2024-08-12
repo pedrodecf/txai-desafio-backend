@@ -13,10 +13,11 @@ import { DeleteProductUseCase } from '@/domain/use-cases/products/delete-product
 import { EditProductUseCase } from '@/domain/use-cases/products/edit-product.use-case';
 import { FetchProductsUseCase } from '@/domain/use-cases/products/fetch-products.use-case';
 import { GetProductByIDUseCase } from '@/domain/use-cases/products/get-product-by-id.use-case';
+import { AuthenticateController } from './controllers/authenticate-user.controller';
 
 @Module({
   imports: [DatabaseModule],
-  controllers: [CreateUserController],
+  controllers: [CreateUserController, AuthenticateController],
   providers: [
     CreateUserUseCase,
     DeleteUserUseCase,

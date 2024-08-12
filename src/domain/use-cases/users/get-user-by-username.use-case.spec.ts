@@ -1,7 +1,7 @@
 import { makeUser } from 'test/factories/make-user';
 import { InMemoryUserRepository } from 'test/repositories/in-memory-user-repository';
 import { GetUserByUsernameUseCase } from './get-user-by-username.use-case';
-import { ResourceNotFoundError } from '../errors/resource-not-found.error';
+import { NotFoundException } from '@nestjs/common';
 
 let inMemoryUserRepository: InMemoryUserRepository;
 let sut: GetUserByUsernameUseCase;
@@ -25,7 +25,7 @@ describe('Get User By Username Use Case', () => {
 
   it('should not be able to get a user by username if it does not exist', async () => {
     await expect(sut.execute({ username: 'inexistent' })).rejects.toThrow(
-      ResourceNotFoundError,
+      NotFoundException,
     );
   });
 });

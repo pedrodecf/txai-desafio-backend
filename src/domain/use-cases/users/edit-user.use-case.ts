@@ -1,7 +1,6 @@
 import { User, UserRole } from '@prisma/client';
 import { UserRepository } from '../../repositories/user.repository';
-import { Injectable } from '@nestjs/common';
-import { ResourceNotFoundError } from '../errors/resource-not-found.error';
+import { Injectable, NotFoundException } from '@nestjs/common';
 
 interface EditUserUseCaseRequest {
   userId: string;
@@ -31,7 +30,7 @@ export class EditUserUseCase {
     const existingUser = await this.userRepository.findById(userId);
 
     if (!existingUser) {
-      throw new ResourceNotFoundError();
+      throw new NotFoundException('Resource not found');
     }
 
     const updatedUser = await this.userRepository.update(userId, {

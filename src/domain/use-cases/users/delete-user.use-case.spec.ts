@@ -1,8 +1,8 @@
 import { InMemoryUserRepository } from 'test/repositories/in-memory-user-repository';
 import { DeleteUserUseCase } from './delete-user.use-case';
 import { makeUser } from 'test/factories/make-user';
-import { ResourceNotFoundError } from '../errors/resource-not-found.error';
 import { randomUUID } from 'crypto';
+import { NotFoundException } from '@nestjs/common';
 
 let inMemoryUserRepository: InMemoryUserRepository;
 let sut: DeleteUserUseCase;
@@ -27,8 +27,6 @@ describe('Delete User Use Case', () => {
   it('should throw error if user not found', async () => {
     const userId = randomUUID();
 
-    await expect(sut.execute({ userId })).rejects.toThrow(
-      ResourceNotFoundError,
-    );
+    await expect(sut.execute({ userId })).rejects.toThrow(NotFoundException);
   });
 });

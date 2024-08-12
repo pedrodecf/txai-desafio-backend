@@ -2,8 +2,7 @@ import { InMemoryProductRepository } from 'test/repositories/in-memory-product-r
 import { makeProduct } from 'test/factories/make-product';
 import { EditProductUseCase } from './edit-product.use-case';
 import { randomUUID } from 'node:crypto';
-import { ResourceNotFoundError } from '../errors/resource-not-found.error';
-import { UnauthorizedError } from '../errors/unauthorized.error';
+import { NotFoundException, UnauthorizedException } from '@nestjs/common';
 
 let inMemoryProductRepository: InMemoryProductRepository;
 let sut: EditProductUseCase;
@@ -43,7 +42,7 @@ describe('Edit Product Use Case', () => {
         userId: 'user-id',
         name: 'Non-existent Product',
       }),
-    ).rejects.toThrow(ResourceNotFoundError);
+    ).rejects.toThrow(NotFoundException);
   });
 
   it('should throw error if user is not authorized to edit the product', async () => {
@@ -53,10 +52,10 @@ describe('Edit Product Use Case', () => {
     await expect(
       sut.execute({
         id: product.id,
-        userId: 'different-user-id', // User ID that doesn't match the product's userId
+        userId: 'different-user-id',
         name: 'Updated Product Name',
       }),
-    ).rejects.toThrow(UnauthorizedError);
+    ).rejects.toThrow(UnauthorizedException);
   });
 
   it('should be able to edit only the name', async () => {

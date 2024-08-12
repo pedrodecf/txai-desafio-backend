@@ -2,8 +2,8 @@ import { InMemoryUserRepository } from 'test/repositories/in-memory-user-reposit
 import { makeUser } from 'test/factories/make-user';
 import { EditUserUseCase } from './edit-user.use-case';
 import { randomUUID } from 'node:crypto';
-import { ResourceNotFoundError } from '../errors/resource-not-found.error';
 import { UserRole } from '@prisma/client';
+import { NotFoundException } from '@nestjs/common';
 
 let inMemoryUserRepository: InMemoryUserRepository;
 let sut: EditUserUseCase;
@@ -44,7 +44,7 @@ describe('Edit User Use Case', () => {
         userId,
         name: 'Non-existent User',
       }),
-    ).rejects.toThrow(ResourceNotFoundError);
+    ).rejects.toThrow(NotFoundException);
   });
 
   it('should be able to edit only the username', async () => {
@@ -84,6 +84,6 @@ describe('Edit User Use Case', () => {
         userId: 'different-user-id',
         name: 'Updated User Name',
       }),
-    ).rejects.toThrow(ResourceNotFoundError);
+    ).rejects.toThrow(NotFoundException);
   });
 });

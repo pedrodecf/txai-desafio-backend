@@ -1,8 +1,9 @@
 import { InMemoryProductRepository } from 'test/repositories/in-memory-product-repository';
 import { DeleteProductUseCase } from './delete-product.use-case';
 import { makeProduct } from 'test/factories/make-product';
-import { ResourceNotFoundError } from '../errors/resource-not-found.error';
+
 import { randomUUID } from 'node:crypto';
+import { NotFoundException } from '@nestjs/common';
 
 let inMemoryProductRepository: InMemoryProductRepository;
 let sut: DeleteProductUseCase;
@@ -27,8 +28,6 @@ describe('Delete Product Use Case', () => {
   it('should throw error if product not found', async () => {
     const productId = randomUUID();
 
-    await expect(sut.execute({ productId })).rejects.toThrow(
-      ResourceNotFoundError,
-    );
+    await expect(sut.execute({ productId })).rejects.toThrow(NotFoundException);
   });
 });

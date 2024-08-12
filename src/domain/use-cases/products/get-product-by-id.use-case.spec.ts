@@ -2,7 +2,7 @@ import { makeProduct } from 'test/factories/make-product';
 import { InMemoryProductRepository } from 'test/repositories/in-memory-product-repository';
 import { GetProductByIDUseCase } from './get-product-by-id.use-case';
 import { randomUUID } from 'node:crypto';
-import { ResourceNotFoundError } from '../errors/resource-not-found.error';
+import { NotFoundException } from '@nestjs/common';
 
 let inMemoryProductRepository: InMemoryProductRepository;
 let sut: GetProductByIDUseCase;
@@ -30,6 +30,6 @@ describe('Get Product By ID Use Case', () => {
         productId: randomUUID(),
         userId: randomUUID(),
       }),
-    ).rejects.toThrow(ResourceNotFoundError);
+    ).rejects.toThrow(NotFoundException);
   });
 });

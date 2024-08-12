@@ -1,6 +1,5 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { UserRepository } from '../../repositories/user.repository';
-import { ResourceNotFoundError } from '../errors/resource-not-found.error';
 
 interface DeleteUserUseCaseRequest {
   userId: string;
@@ -14,7 +13,7 @@ export class DeleteUserUseCase {
     const userExists = await this.userRepository.findById(userId);
 
     if (!userExists) {
-      throw new ResourceNotFoundError();
+      throw new NotFoundException('Resource not found');
     }
 
     await this.userRepository.delete(userId);
