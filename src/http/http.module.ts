@@ -19,6 +19,11 @@ import { DeleteProductController } from './controllers/delete-product.controller
 import { EditProductController } from './controllers/edit-product.controller';
 import { FetchProductsController } from './controllers/fetch-products.controller';
 import { GetProductController } from './controllers/get-product.controller';
+import { DeleteUserController } from './controllers/delete-user.controller';
+import { FetchUsersController } from './controllers/fetch-users.controller';
+import { GetUserByUsernameController } from './controllers/get-user-by-username.controller';
+import { EditUserController } from './controllers/edit-user.controller';
+import { GetUserByIdController } from './controllers/get-user-by-id.controller';
 
 @Module({
   imports: [DatabaseModule],
@@ -30,6 +35,11 @@ import { GetProductController } from './controllers/get-product.controller';
     EditProductController,
     FetchProductsController,
     GetProductController,
+    FetchUsersController,
+    DeleteUserController,
+    GetUserByUsernameController,
+    EditUserController,
+    GetUserByIdController,
   ],
   providers: [
     CreateUserUseCase,

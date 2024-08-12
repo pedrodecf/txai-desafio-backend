@@ -1,15 +1,16 @@
 @baseUrl = http://localhost:3000
 @authToken = {{authenticate.response.body.access_token}}
 @productId = {{create_product.response.body.product.id}}
+@userId = {{get_user_by_username.response.body.user.id}}
 
-# @name create-user
+# @name create_user
 POST {{baseUrl}}/users
 Content-Type: application/json
 
 {
     "name": "Max Doe",
-    "username": "max",
-    "email": "max@doe.com",
+    "username": "mfdasfax",
+    "email": "max@dofade.com",
     "password": "password"
 }
 
@@ -65,7 +66,7 @@ Authorization: Bearer {{authToken}}
 
 # @name fetch_products
 
-GET {{baseUrl}}/products
+GET {{baseUrl}}/products?page=1
 Content-Type: application/json
 Authorization: Bearer {{authToken}}
 
@@ -74,5 +75,52 @@ Authorization: Bearer {{authToken}}
 # @name get_product_by_id
 
 GET {{baseUrl}}/products/{{productId}}
+Content-Type: application/json
+Authorization: Bearer {{authToken}}
+
+###
+
+# @name fetch_users
+
+GET {{baseUrl}}/users
+Content-Type: application/json
+Authorization: Bearer {{authToken}}
+
+###
+
+# @name get_user_by_username
+
+GET {{baseUrl}}/users/max
+Content-Type: application/json
+Authorization: Bearer {{authToken}}
+
+###
+
+# @name get_user_by_id
+
+GET {{baseUrl}}/user/{{userId}}
+Content-Type: application/json
+Authorization: Bearer {{authToken}}
+
+###
+
+# @name edit_user
+
+PUT {{baseUrl}}/users/{{userId}}
+Content-Type: application/json
+Authorization: Bearer {{authToken}}
+
+{
+    "name": "Novo Nome",
+    "email": "novo@email.com",
+    "password": "5876489465841",
+    "username": "novousername"
+}
+
+###
+
+# @name delete_user
+
+DELETE {{baseUrl}}/users/{{userId}}
 Content-Type: application/json
 Authorization: Bearer {{authToken}}

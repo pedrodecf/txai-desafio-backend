@@ -19,7 +19,10 @@ describe('Delete User Use Case', () => {
 
     expect(inMemoryUserRepository.items.length).toBe(1);
 
-    await sut.execute({ userId: user.id.toString() });
+    await sut.execute({
+      userId: user.id.toString(),
+      userIdParam: user.id.toString(),
+    });
 
     expect(inMemoryUserRepository.items.length).toBe(0);
   });
@@ -27,6 +30,8 @@ describe('Delete User Use Case', () => {
   it('should throw error if user not found', async () => {
     const userId = randomUUID();
 
-    await expect(sut.execute({ userId })).rejects.toThrow(NotFoundException);
+    await expect(
+      sut.execute({ userId, userIdParam: 'fasdfas' }),
+    ).rejects.toThrow(NotFoundException);
   });
 });

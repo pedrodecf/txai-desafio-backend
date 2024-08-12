@@ -6,7 +6,7 @@ interface FetchUsersUseCaseRequest {
   page: number;
 }
 
-interface FetchUsersUseCaseResponse {
+export interface FetchUsersUseCaseResponse {
   users: User[];
 }
 

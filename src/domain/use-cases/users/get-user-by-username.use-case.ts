@@ -6,7 +6,7 @@ interface GetUserByUsernameUseCaseRequest {
   username: string;
 }
 
-interface GetUserByUsernameUseCaseResponse {
+export interface GetUserByUsernameUseCaseResponse {
   user: User;
 }
 
