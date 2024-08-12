@@ -6,13 +6,17 @@ import {
   GetUserByIDUseCase,
   GetUserByIDUseCaseResponse,
 } from '@/domain/use-cases/users/get-user-by-id.use-case';
+import { RolesGuard } from '@/auth/roles.guard';
+import { Roles } from '@/auth/roles.decorator';
+import { UserRole } from '@prisma/client';
 
 @Controller('/user')
-@UseGuards(JwtAuthGuard)
+@UseGuards(JwtAuthGuard, RolesGuard)
 export class GetUserByIdController {
   constructor(private sut: GetUserByIDUseCase) {}
 
   @Get()
+  @Roles(UserRole.ADMIN)
   async handle(
     @CurrentUser() user: TokenPayload,
   ): Promise<GetUserByIDUseCaseResponse> {

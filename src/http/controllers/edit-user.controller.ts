@@ -12,6 +12,9 @@ import { ZodValidationPipe } from '../pipes/zod-validation.pipe';
 import { JwtAuthGuard } from '@/auth/jwt-auth.guard';
 import { CurrentUser } from '@/auth/current-user-decorator';
 import { TokenPayload } from '@/auth/jwt-strategy';
+import { RolesGuard } from '@/auth/roles.guard';
+import { Roles } from '@/auth/roles.decorator';
+import { UserRole } from '@prisma/client';
 
 const editUserBodySchema = z.object({
   name: z.string().min(2).max(255),
@@ -24,12 +27,13 @@ const bodyValidationPipe = new ZodValidationPipe(editUserBodySchema);
 type EditUserBodySchema = z.infer<typeof editUserBodySchema>;
 
 @Controller('/users/:id')
-@UseGuards(JwtAuthGuard)
+@UseGuards(JwtAuthGuard, RolesGuard)
 export class EditUserController {
   constructor(private editUser: EditUserUseCase) {}
 
   @Put()
   @HttpCode(204)
+  @Roles(UserRole.ADMIN)
   async handle(
     @Body(bodyValidationPipe) body: EditUserBodySchema,
     @Param('id') id: string,

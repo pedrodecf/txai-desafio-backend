@@ -6,6 +6,9 @@ import {
   FetchUsersUseCase,
   FetchUsersUseCaseResponse,
 } from '@/domain/use-cases/users/fetch-users.use-case';
+import { RolesGuard } from '@/auth/roles.guard';
+import { Roles } from '@/auth/roles.decorator';
+import { UserRole } from '@prisma/client';
 
 const pageQueryParamSchema = z
   .string()
@@ -18,11 +21,12 @@ const queryValidationPipe = new ZodValidationPipe(pageQueryParamSchema);
 type PageQueryParamSchema = z.infer<typeof pageQueryParamSchema>;
 
 @Controller('/users')
-@UseGuards(JwtAuthGuard)
+@UseGuards(JwtAuthGuard, RolesGuard)
 export class FetchUsersController {
   constructor(private sut: FetchUsersUseCase) {}
 
   @Get()
+  @Roles(UserRole.ADMIN)
   async handle(
     @Query('page', queryValidationPipe) page: PageQueryParamSchema,
   ): Promise<FetchUsersUseCaseResponse> {

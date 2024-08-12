@@ -9,8 +9,8 @@ Content-Type: application/json
 
 {
     "name": "Max Doe",
-    "username": "mfdasfax",
-    "email": "max@dofade.com",
+    "username": "adfa",
+    "email": "max@dofsdaade.com",
     "password": "password"
 }
 
@@ -22,7 +22,7 @@ POST {{baseUrl}}/auth
 Content-Type: application/json
 
 {
-  "username": "max",
+  "username": "adfa",
   "password": "password"
 }
 
