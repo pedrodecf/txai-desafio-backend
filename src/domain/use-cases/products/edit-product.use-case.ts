@@ -16,7 +16,7 @@ interface EditProductUseCaseResponse {
   product: Product | null;
 }
 
-Injectable();
+@Injectable()
 export class EditProductUseCase {
   constructor(private productRepository: ProductRepository) {}
 

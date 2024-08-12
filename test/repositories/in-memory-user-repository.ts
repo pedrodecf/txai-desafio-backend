@@ -1,5 +1,4 @@
-import { UserRepository } from '@/repositories/user.repository';
-import { ResourceNotFoundError } from '@/use-cases/errors/resource-not-found.error';
+import { UserRepository } from '@/domain/repositories/user.repository';
 import { PaginationParams } from '@/utils/paginations-params';
 import { User } from '@prisma/client';
 import { randomUUID } from 'node:crypto';
@@ -25,7 +24,7 @@ export class InMemoryUserRepository implements UserRepository {
   async delete(userId: string): Promise<void> {
     const itemIndex = this.items.findIndex((item) => item.id === userId);
     if (itemIndex === -1) {
-      throw new ResourceNotFoundError();
+      return null;
     }
     this.items.splice(itemIndex, 1);
   }

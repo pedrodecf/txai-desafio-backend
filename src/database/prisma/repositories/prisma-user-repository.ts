@@ -1,10 +1,10 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from '../prisma.service';
-import { UserRepository } from '@/repositories/user.repository';
 import { User } from '@prisma/client';
 import { PaginationParams } from '@/utils/paginations-params';
+import { UserRepository } from '@/domain/repositories/user.repository';
 
-Injectable();
+@Injectable()
 export class PrismaUserRepository implements UserRepository {
   constructor(private prisma: PrismaService) {}
 

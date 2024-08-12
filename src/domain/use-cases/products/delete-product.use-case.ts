@@ -6,7 +6,7 @@ interface DeleteProductUseCaseRequest {
   productId: string;
 }
 
-Injectable();
+@Injectable()
 export class DeleteProductUseCase {
   constructor(private productRepository: ProductRepository) {}
 

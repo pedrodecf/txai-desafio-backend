@@ -10,7 +10,7 @@ interface FetchUsersUseCaseResponse {
   users: User[];
 }
 
-Injectable();
+@Injectable()
 export class FetchUsersUseCase {
   constructor(private userRepository: UserRepository) {}
 

@@ -1,10 +1,10 @@
-import { ProductRepository } from '@/repositories/product.repository';
 import { PaginationParams } from '@/utils/paginations-params';
 import { Injectable } from '@nestjs/common';
 import { Prisma, Product } from '@prisma/client';
 import { PrismaService } from '../prisma.service';
+import { ProductRepository } from '@/domain/repositories/product.repository';
 
-Injectable();
+@Injectable()
 export class PrismaProductRepository implements ProductRepository {
   constructor(private prisma: PrismaService) {}
 

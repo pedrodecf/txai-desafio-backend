@@ -11,7 +11,7 @@ interface FetchProductsUseCaseResponse {
   products: Product[];
 }
 
-Injectable();
+@Injectable()
 export class FetchProductsUseCase {
   constructor(private productRepository: ProductRepository) {}
 

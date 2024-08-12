@@ -13,7 +13,7 @@ interface CreateProductUseCaseResponse {
   product: Product;
 }
 
-Injectable();
+@Injectable()
 export class CreateProductUseCase {
   constructor(private productRepository: ProductRepository) {}
 

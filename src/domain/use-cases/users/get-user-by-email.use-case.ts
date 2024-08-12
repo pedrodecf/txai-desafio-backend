@@ -11,7 +11,7 @@ interface GetUserByEmailUseCaseResponse {
   user: User;
 }
 
-Injectable();
+@Injectable()
 export class GetUserByEmailUseCase {
   constructor(private userRepository: UserRepository) {}
 

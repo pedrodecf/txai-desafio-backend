@@ -6,7 +6,7 @@ interface DeleteUserUseCaseRequest {
   userId: string;
 }
 
-Injectable();
+@Injectable()
 export class DeleteUserUseCase {
   constructor(private userRepository: UserRepository) {}
 

@@ -1,5 +1,4 @@
-import { ProductRepository } from '@/repositories/product.repository';
-import { ResourceNotFoundError } from '@/use-cases/errors/resource-not-found.error';
+import { ProductRepository } from '@/domain/repositories/product.repository';
 import { PaginationParams } from '@/utils/paginations-params';
 import { Product } from '@prisma/client';
 import { randomUUID } from 'node:crypto';
@@ -28,7 +27,7 @@ export class InMemoryProductRepository implements ProductRepository {
       (item) => item.id.toString() === productId.toString(),
     );
     if (itemIndex === -1) {
-      throw new ResourceNotFoundError();
+      return null;
     }
     this.items.splice(itemIndex, 1);
   }

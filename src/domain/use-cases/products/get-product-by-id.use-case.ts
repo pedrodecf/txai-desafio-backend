@@ -13,7 +13,7 @@ interface GetProductByIDUseCaseResponse {
   product: Product;
 }
 
-Injectable();
+@Injectable()
 export class GetProductByIDUseCase {
   constructor(private productRepository: ProductRepository) {}
 
