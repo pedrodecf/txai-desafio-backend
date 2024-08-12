@@ -1,7 +1,7 @@
 @baseUrl = http://localhost:3000
 @authToken = {{authenticate.response.body.access_token}}
 @productId = {{create_product.response.body.product.id}}
-@userId = {{create_user.response.body.user.id}}
+@userId = {{get_user_by_username.response.body.user.id}}
 
 # @name create_user
 POST {{baseUrl}}/users

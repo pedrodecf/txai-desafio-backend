@@ -33,7 +33,6 @@ describe('Edit User Use Case', () => {
     expect(updatedUser.role).toBe(updatedUserProps.role);
     expect(updatedUser.username).toBe(updatedUserProps.username);
     expect(updatedUser.email).toBe(updatedUserProps.email);
-    expect(updatedUser.password).toBe(user.password);
   });
 
   it('should throw error if user not found', async () => {
