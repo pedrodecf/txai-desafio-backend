@@ -14,10 +14,17 @@ import { EditProductUseCase } from '@/domain/use-cases/products/edit-product.use
 import { FetchProductsUseCase } from '@/domain/use-cases/products/fetch-products.use-case';
 import { GetProductByIDUseCase } from '@/domain/use-cases/products/get-product-by-id.use-case';
 import { AuthenticateController } from './controllers/authenticate-user.controller';
+import { CreateProductController } from './controllers/create-product.controller';
+import { DeleteProductController } from './controllers/delete-product.controller';
 
 @Module({
   imports: [DatabaseModule],
-  controllers: [CreateUserController, AuthenticateController],
+  controllers: [
+    CreateUserController,
+    AuthenticateController,
+    CreateProductController,
+    DeleteProductController,
+  ],
   providers: [
     CreateUserUseCase,
     DeleteUserUseCase,

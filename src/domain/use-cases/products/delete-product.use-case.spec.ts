@@ -20,7 +20,10 @@ describe('Delete Product Use Case', () => {
 
     expect(inMemoryProductRepository.items.length).toBe(1);
 
-    await sut.execute({ productId: product.id.toString() });
+    await sut.execute({
+      productId: product.id.toString(),
+      userId: product.userId,
+    });
 
     expect(inMemoryProductRepository.items.length).toBe(0);
   });
@@ -28,6 +31,8 @@ describe('Delete Product Use Case', () => {
   it('should throw error if product not found', async () => {
     const productId = randomUUID();
 
-    await expect(sut.execute({ productId })).rejects.toThrow(NotFoundException);
+    await expect(sut.execute({ productId, userId: 'random' })).rejects.toThrow(
+      NotFoundException,
+    );
   });
 });

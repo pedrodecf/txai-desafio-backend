@@ -9,7 +9,7 @@ interface CreateProductUseCaseRequest {
   quantity: number;
 }
 
-interface CreateProductUseCaseResponse {
+export interface CreateProductUseCaseResponse {
   product: Product;
 }
 

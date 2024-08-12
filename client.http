@@ -1,5 +1,6 @@
 @baseUrl = http://localhost:3000
 @authToken = {{authenticate.response.body.access_token}}
+@productId = {{create_product.response.body.product.id}}
 
 # @name create-user
 POST {{baseUrl}}/users
@@ -23,3 +24,25 @@ Content-Type: application/json
   "username": "johndoezera",
   "password": "password"
 }
+
+###
+
+# @name create_product
+
+POST {{baseUrl}}/products
+Content-Type: application/json
+Authorization: Bearer {{authToken}}
+
+{
+    "name": "Product 1",
+    "quantity": 4,
+    "value": 10.99
+}
+
+###
+
+# @name delete_product
+
+DELETE {{baseUrl}}/products/{{productId}}
+Content-Type: application/json
+Authorization: Bearer {{authToken}}
